@@ -6,14 +6,7 @@ If you'd like to iterate and test your MCP server, you can do so in local develo
 
 1. Create a `.dev.vars` file in your project root:
 
-   If you're a Cloudflare employee:
-
-   ```
-   CLOUDFLARE_CLIENT_ID=your_development_cloudflare_client_id
-   CLOUDFLARE_CLIENT_SECRET=your_development_cloudflare_client_secret
-   ```
-
-   If you're an external contributor, you can provide a development API token:
+   Provide a development API token:
 
    ```
    DEV_DISABLE_OAUTH=true
@@ -27,8 +20,40 @@ If you'd like to iterate and test your MCP server, you can do so in local develo
    npx wrangler dev
    ```
 
-3. To test locally, open Inspector, and connect to `http://localhost:8976/mcp`.
-   Once you follow the prompts, you'll be able to "List Tools". You can also connect with any MCP client.
+   If `8976` is already in use on your machine, run on another port (for example `8977`):
+
+   ```bash
+   npx wrangler dev --port 8977
+   ```
+
+3. To test locally, open Inspector and connect to `http://localhost:8976/mcp` (or the custom port you chose).
+   Once you follow the prompts, you'll be able to "List Tools".
+
+4. OpenCode setup for local, no-OAuth mode:
+
+   When `DEV_DISABLE_OAUTH=true`, `opencode mcp auth` is not needed for the local server.
+   Configure `radar-local` as a local `mcp-remote` bridge instead of a direct remote URL.
+
+   In `~/.config/opencode/opencode.json`:
+
+   ```json
+   {
+   	"mcp": {
+   		"radar-local": {
+   			"type": "local",
+   			"command": ["npx", "-y", "mcp-remote", "http://localhost:8977/mcp"]
+   		}
+   	}
+   }
+   ```
+
+   Then run:
+
+   ```bash
+   opencode mcp list
+   ```
+
+   You should see `radar-local` as connected while `wrangler dev` is running.
 
 ## Deploying the Worker ( Cloudflare employees only )
 
