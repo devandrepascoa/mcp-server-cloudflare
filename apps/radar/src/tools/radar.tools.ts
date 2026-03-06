@@ -1294,7 +1294,7 @@ export function registerRadarTools(agent: RadarMCP) {
 
 	agent.server.tool(
 		'get_netflows_data',
-		'Retrieve NetFlows traffic data showing network traffic patterns. Supports filtering by ADM1 (administrative level 1, e.g., states/provinces) via geoId.',
+		'Retrieve NetFlows traffic data showing network traffic patterns. Supports filtering by ADM1 (administrative level 1, e.g., states/provinces) via geoId. timeseries_groups/product does not support limitPerGroup.',
 		{
 			dateRange: DateRangeArrayParam.optional(),
 			dateStart: DateStartArrayParam.optional(),
