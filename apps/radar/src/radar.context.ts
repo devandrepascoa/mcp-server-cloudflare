@@ -39,6 +39,7 @@ This server provides tools powered by the Cloudflare Radar API for global Intern
 - **Bots**: Bot traffic by category, operator, kind (\`get_bots_data\`)
 - **Certificate Transparency**: SSL/TLS certificate issuance trends (\`get_certificate_transparency_data\`)
 - **NetFlows**: Network traffic patterns with ADM1 filtering (\`get_netflows_data\`)
+  - Caveat: for \`dimension: "timeseries_groups/product"\`, do not pass \`limitPerGroup\` (currently returns 400/Internal Error).
 - **Cloud Observatory**: Cloud provider performance - AWS, GCP, Azure, OCI (\`list_origins\`, \`get_origin_details\`, \`get_origins_data\`)
 - **URL Scanner**: Scan and analyze URLs for security threats (\`search_url_scans\`, \`create_url_scan\`, \`get_url_scan\`, \`get_url_scan_screenshot\`, \`get_url_scan_har\`)
 
